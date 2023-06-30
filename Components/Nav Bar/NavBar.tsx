@@ -3,20 +3,25 @@ import { doLogout, getCurrentUserDetail, isLoggedIn } from "../../auth/index";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { SignupValueType } from "@/Types/types";
+
+import { CgProfile } from "react-icons/cg"
 const NavBar = () => {
   const router = useRouter();
   const [rand, setRand] = useState("true");
 
-  useEffect(() => {}, [rand]);
+  useEffect(() => { }, [rand]);
 
+  const userDetail: SignupValueType | undefined = getCurrentUserDetail();
   const logout = () => {
-    const userDetail: SignupValueType | undefined = getCurrentUserDetail();
+
     console.log(userDetail);
     doLogout(() => {
       if (userDetail !== undefined) {
-        console.log(userDetail.userName, "user logout...!!!!");
         setRand("false");
+        router.push('/');
+
       }
+
     });
   };
 
@@ -108,6 +113,12 @@ const NavBar = () => {
                     <li className="nav-item">
                       <a className=" btn nav-link text-white" onClick={logout}>
                         Log Out
+                      </a>
+                    </li>
+                    <li className="nav-item d-flex">
+                      <h2 className="text-white"><CgProfile /></h2>
+                      <a className=" btn nav-link text-white" >
+                        <span className="badge text-bg-danger">{userDetail?.userName}</span>
                       </a>
                     </li>
                   </>

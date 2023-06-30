@@ -1,3 +1,4 @@
+//@ts-check
 /* eslint-disable @next/next/no-img-element */
 import { CartType, SignupValueType } from "@/Types/types";
 import { getCurrentUserDetail } from "@/auth";
@@ -10,19 +11,21 @@ import {
 } from "@/services/userService";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const InsideCart = () => {
   const user: SignupValueType | undefined = getCurrentUserDetail();
   const [cartProduct, setCartProduct] = useState<CartType[]>([]);
   const [rand, setRand] = useState<number>(0);
+  const router = useRouter()
 
   useEffect(() => {
     getCartProducts(user?.userName)
       .then((res) => {
         setCartProduct(res);
       })
-        .catch((err) => {
-          
+      .catch((err) => {
+
         console.log(err);
       });
   }, [rand]);
@@ -61,12 +64,21 @@ const InsideCart = () => {
       });
   };
 
+  // const total: number = cartProduct.map((res) => {
+  //   let price: number = res.quantity ? res.quantity * parseInt(res.price) : null;
+  //   return price;
+  // });
+  const total: number = cartProduct?.reduce((r, res) => {
+    return r + (res.quantity ? res.quantity * parseInt(res.price) : 0);
+  }, 0);
+
+
   const CartProduct = (val: CartType) => {
     return (
       <>
         <div
-          className="card mb-3"
-          //   style={{ minWidth: "35rem", maxWidth: "55rem" }}
+          className="card mb-3 shadow-lg p-3 mb-5 bg-body-tertiary rounded border-0"
+        //   style={{ minWidth: "35rem", maxWidth: "55rem" }}
         >
           <div className="row g-0">
             <div className="col-md-4">
@@ -78,11 +90,11 @@ const InsideCart = () => {
             </div>
             <div className="col-md-6">
               <div className="card-body">
-                <h5 className="card-title">{val.name}</h5>
+                <h5 className="card-title">Name : {val.name}</h5>
                 <p className="card-text">
-                  {val.price}*{val.price}
+                  Price : {val.price}
                 </p>
-                <p className="card-text">{val.quantity}</p>
+                <p className="card-text">Quantity : {val.quantity}</p>
               </div>
             </div>
             <div className=" col-md-2 d-flex flex-column d-grid gap-2 col-6 mx-auto">
@@ -116,18 +128,18 @@ const InsideCart = () => {
       </>
     );
   };
-  if(cartProduct!= null){
+  if (cartProduct != null && total !== null) {
     return (
       <div>
-        <div className="row">
+        <div className="row mt-4">
           <div className="col-md-8">{cartProduct.map(CartProduct)}</div>
-          <div className="col-6 col-md-4 text-center">
-            <div className="border">
+          <div className="col-6 col-md-4 text-center ">
+            <div className="shadow-lg p-3 mb-5 bg-body-tertiary rounded border-0">
               <div>
                 <h1>Total</h1>
               </div>
               <div>
-                <h3>Sub- Total</h3>
+                <h3>Sub- Total : {total}</h3>
               </div>
               <div>
                 <h3>Delivery</h3>
@@ -141,9 +153,8 @@ const InsideCart = () => {
       </div>
     );
   } else {
-    <div>
-      <h1>Cart is Empty.!!!!!</h1>
-    </div>;
+    router.push("/Dashboard");
+    toast.success("cart is empty");
   }
 };
 

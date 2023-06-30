@@ -18,7 +18,6 @@ const Home = () => {
     return (
       <div>
         <NavBar />
-        <h1>Inside Cart.!!!!</h1>
         <InsideCart />
       </div>
     );

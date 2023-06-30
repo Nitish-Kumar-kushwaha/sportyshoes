@@ -32,7 +32,6 @@ const Login = () => {
           if (response === false) {
             toast.error("password is wrong...!!!");
           } else {
-            console.log(response);
             doLogin(response, () => {
               console.log("data saved to local storage");
               router.push("/Dashboard");
@@ -50,9 +49,9 @@ const Login = () => {
       resetForm();
       getUser()
         .then((responseee: SignupValueType) => {
-          console.log("values",responseee);
+          console.log({ responseee });
         })
-        
+
         .catch((err) => {
           console.log(err);
         });

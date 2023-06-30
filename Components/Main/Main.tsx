@@ -2,7 +2,9 @@
 import Card from "@/Components/Main/Card/Cards";
 import Filter from "@/Components/Main/Filter/Filter";
 import { ProductType, SignupValueType } from "@/Types/types";
+import { isLoggedIn } from "@/auth";
 import { getUser } from "@/services/userService";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const Main = () => {
@@ -20,6 +22,8 @@ const Main = () => {
       });
   }, []);
 
+  const router = useRouter()
+
   function nCard(val: ProductType): any {
     return (
       <Card
@@ -32,17 +36,24 @@ const Main = () => {
     );
   }
 
-  return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-6 col-md-3 ">
-          <h1 className="text-center">Filters</h1>
-          <Filter />
+  if (isLoggedIn()) {
+    return (
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-6 col-md-3 ">
+            <h1 className="text-center">Filters</h1>
+            <Filter />
+          </div>
+          <div className="col-md-9 row ">{product.map(nCard)}</div>
         </div>
-        <div className="col-md-9 row ">{product.map(nCard)}</div>
       </div>
-    </div>
-  );
+    );
+  }
+  else {
+    router.push("/");
+  }
+
+
 };
 
 export default Main;

@@ -26,7 +26,6 @@ const Home = () => {
 
         <Main />
 
-        <DashBoard />
       </>
     );
   } else {

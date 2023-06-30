@@ -10,7 +10,7 @@ const DashBoard = () => {
   const router = useRouter();
   const [rand, setRand] = useState("true");
 
-  useEffect(() => {}, [rand]);
+  useEffect(() => { }, [rand]);
 
   const logout = () => {
     const userDetail: SignupValueType | undefined = getCurrentUserDetail();
