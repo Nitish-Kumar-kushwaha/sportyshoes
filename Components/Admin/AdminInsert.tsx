@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 
-const Admin = () => {
+const AdminInsert = () => {
   const {
     handleSubmit,
     handleChange,
@@ -32,7 +32,7 @@ const Admin = () => {
           toast.error("Product Not added");
         });
       resetForm();
-      
+
     },
   });
 
@@ -107,4 +107,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default AdminInsert;

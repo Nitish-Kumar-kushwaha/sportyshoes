@@ -16,6 +16,12 @@ export const loginUser = (user: LoginType) => {
   });
 };
 
+export const getAllUser = () => {
+  return myAxios.get("/allUsers").then((response) => {
+    return response.data;
+  })
+}
+
 export const addProduct = (product: ProductType) => {
   return myAxios.post("/product/add", product).then((response) => {
     console.log(response.data);

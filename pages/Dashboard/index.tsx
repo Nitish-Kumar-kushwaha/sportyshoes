@@ -1,4 +1,4 @@
-import Admin from "@/Components/Admin/Admin";
+import Admin from "@/Components/Admin/AdminInsert";
 import DashBoard from "@/Components/Home/DashBoard";
 import Main from "@/Components/Main/Main";
 import NavBar from "@/Components/Nav Bar/NavBar";

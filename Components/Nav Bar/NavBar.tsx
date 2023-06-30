@@ -95,6 +95,16 @@ const NavBar = () => {
                         Login
                       </Link>
                     </li>
+
+                    <li className="nav-item">
+                      <Link
+                        className="nav-link active text-white"
+                        aria-current="page"
+                        href="/Admin"
+                      >
+                        Admin
+                      </Link>
+                    </li>
                   </>
                 )}
 
@@ -104,9 +114,6 @@ const NavBar = () => {
                       <div>
                         <Link className="nav-link text-white" href="/Cart">
                           Cart{" "}
-                          <span className="position-absolute translate-middle badge rounded-pill bg-danger">
-                            99+
-                          </span>
                         </Link>
                       </div>
                     </li>

@@ -25,6 +25,6 @@ export type CartType = {
   category: string;
   image: string;
   price: string;
-  quantity?: number| null|undefined;
-  userName: string|undefined;
+  quantity?: number | null | undefined;
+  userName: string | undefined;
 };

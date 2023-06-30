@@ -9,7 +9,7 @@ const Card = ({ id, name, category, image, price }: ProductType) => {
 
   const addToCart = async () => {
 
-    const productQuantity = await getQuantity(name,userDetail?.userName)
+    const productQuantity = await getQuantity(name, userDetail?.userName)
     const product: CartType = {
       name: name,
       category: category,
@@ -41,7 +41,7 @@ const Card = ({ id, name, category, image, price }: ProductType) => {
           <p className="card-text">{category}</p>
           <p className="card-text">{price}</p>
           <a className="btn btn-primary" onClick={addToCart}>
-            Add to card
+            Add to cart
           </a>
         </div>
       </div>
